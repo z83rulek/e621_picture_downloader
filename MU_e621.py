@@ -11,7 +11,15 @@ ThreadCount = 64
 
 #URL = "https://e621.net/user/show/222675"
 #URL = sys.argv[1]
-URL = input("請輸入使用者資訊主頁的網址 (如 : https://e621.net/user/show/000001)\n>> ")
+while 1==1:
+    URL_temp = input("請輸入使用者資訊主頁的網址 (如 : https://e621.net/user/show/000001)\n>> ")
+    #print(URL_temp[0:27])
+    if URL_temp[0:27]=="https://e621.net/user/show/":
+        URL = URL_temp
+        print("格式正確")
+        break
+    else:
+        print("請檢查網址格式")
 
 headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0'}
 
@@ -22,7 +30,7 @@ if rs.status_code == requests.codes.OK:
     print("連線成功")
 else:
     print("連線失敗")
-    os._exit()
+    os._exit(0)
 
 html_doc = rs.text
 
@@ -38,7 +46,11 @@ sel = soup.select("table.rounded tbody tr td a")
 totalPicture = int(sel[1].text)
 totalPage = int(math.ceil(totalPicture / 75))
 
-#上面取得了作者名字artistName跟圖片總數totalPicture跟總頁數totalPage
+if artistName == "Users":
+    print("使用者不存在")
+    os._exit(0)
+
+#上面取得了上傳者名字artistName跟圖片總數totalPicture跟總頁數totalPage
 
 img_page = [] #宣告list
 
@@ -113,7 +125,5 @@ os.system("pause")
 #之後再加上檔案重複不下載的功能
 #還有可以指定頁數的範圍
 #還有接受不同格式的網址
-#還有網址格式的檢查
-#還要新增沒有此使用者的例外條件
 #新增網站拒絕連線的例外狀況
 #沒有圖片就不要新增資料夾
