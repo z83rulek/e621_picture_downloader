@@ -3,11 +3,12 @@
 (已使用多執行緒加速)  
   
 程式下載：  
-https://github.com/z83rulek/e621_picture_downloader/releases/download/v1.0/e621_ver.1.exe  
+https://github.com/z83rulek/e621_picture_downloader/releases  
   
 Paste URL of an user's home page, then you can download all of his/her pictures, GIFs and videos  
 It will create an folder named by that user's ID  
 (multi-threaded program)  
   
 executable file:  
-https://github.com/z83rulek/e621_picture_downloader/releases/download/v1.0/e621_ver.1.exe  
+https://github.com/z83rulek/e621_picture_downloader/releases  
+  
