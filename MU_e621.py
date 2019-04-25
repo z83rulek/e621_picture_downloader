@@ -30,6 +30,7 @@ if rs.status_code == requests.codes.OK:
     print("連線成功")
 else:
     print("連線失敗")
+    os.system("pause")
     os._exit(0)
 
 html_doc = rs.text
@@ -48,6 +49,7 @@ totalPage = int(math.ceil(totalPicture / 75))
 
 if artistName == "Users":
     print("使用者不存在")
+    os.system("pause")
     os._exit(0)
 
 #上面取得了上傳者名字artistName跟圖片總數totalPicture跟總頁數totalPage
