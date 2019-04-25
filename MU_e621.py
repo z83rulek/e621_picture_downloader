@@ -29,7 +29,7 @@ rs = requests.get(URL, headers=headers)
 if rs.status_code == requests.codes.OK:
     print("連線成功")
 else:
-    print("連線失敗")
+    print("連線失敗\n")
     os.system("pause")
     os._exit(0)
 
@@ -48,7 +48,7 @@ totalPicture = int(sel[1].text)
 totalPage = int(math.ceil(totalPicture / 75))
 
 if artistName == "Users":
-    print("使用者不存在")
+    print("使用者不存在\n")
     os.system("pause")
     os._exit(0)
 
