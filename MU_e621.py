@@ -7,7 +7,7 @@ import urllib.request
 #from urllib.request import urlretrieve
 from bs4 import BeautifulSoup
 
-ThreadCount = 64
+ThreadCount = 16
 
 #URL = "https://e621.net/user/show/222675"
 #URL = sys.argv[1]
