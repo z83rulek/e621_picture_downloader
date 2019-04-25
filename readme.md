@@ -2,7 +2,7 @@
 程式會新增一個資料夾，名為圖片上傳者的使用者名稱  
 (已使用多執行緒加速)  
   
-程式下載：  
+執行檔下載：  
 https://github.com/z83rulek/e621_picture_downloader/releases  
   
 Paste URL of an user's home page, then you can download all of his/her pictures, GIFs and videos  
