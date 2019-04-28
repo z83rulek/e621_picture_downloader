@@ -42,23 +42,23 @@ html_doc = rs.text
 
 soup = BeautifulSoup(html_doc, 'html.parser')
 sel = soup.select("div h2")
-artistName = sel[0].text.split("\n",1)[0] #把整個字串中的第一個token拆解出來
+uploaderName = sel[0].text.split("\n",1)[0] #把整個字串中的第一個token拆解出來
 sel = soup.select("table.rounded tbody tr td a")
 totalPicture = int(sel[1].text)
 totalPage = int(math.ceil(totalPicture / 75))
 
-if artistName == "Users":
+if uploaderName == "Users":
     print("使用者不存在\n")
     os.system("pause")
     os._exit(0)
 
-#上面取得了上傳者名字artistName跟圖片總數totalPicture跟總頁數totalPage
+#上面取得了上傳者名字uploaderName跟圖片總數totalPicture跟總頁數totalPage
 
 img_page = [] #宣告list
 
 
 for page in range(totalPage):
-	URL = "https://e621.net/post/index/" + str(page + 1) + "/user:" + artistName
+	URL = "https://e621.net/post/index/" + str(page + 1) + "/user:" + uploaderName
 
 	rs = requests.get(URL, headers=headers)
 	html_doc = rs.text
@@ -80,8 +80,8 @@ print("總頁數 : " + str(totalPage))
 print("總圖片數 : " + str(numOfSub_URL))
 
 
-os.makedirs(artistName, exist_ok=True) #建立目錄存放檔案
-print("已新增資料夾，名為 : " + artistName)
+os.makedirs(uploaderName, exist_ok=True) #建立目錄存放檔案
+print("已新增資料夾，名為 : " + uploaderName)
 print("下載中......")
 downloadedNum = 0
 
@@ -95,7 +95,7 @@ def downloadSomePIC(strat_num, end_num):
 		sel = soup.select("div h4 a")
 		#print(sel[0]["href"])
 		#print(sel[0]["href"].split("/")[6])
-		urllib.request.urlretrieve(sel[0]["href"], artistName + "/" + sel[0]["href"].split("/")[6]) #把檔名拆解出來並儲存
+		urllib.request.urlretrieve(sel[0]["href"], uploaderName + "/" + sel[0]["href"].split("/")[6]) #把檔名拆解出來並儲存
 		downloadedNum += 1
 		print("已下載 : " + str(downloadedNum) + "/" + str(totalPicture))
 	
