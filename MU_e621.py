@@ -83,20 +83,17 @@ else:
 
 img_page = [] #宣告list
 
-print("開始掃描...")
-for page in range(totalPage):
-
+def scanAPage(page):
 	if TagSearchMode == 1:
-		URL = "https://e621.net/post/index/" + str(page + 1) + "/" + str(searchKeywords)
+		URL = "https://e621.net/post/index/" + str(page) + "/" + str(searchKeywords)
 	else:
-		URL = "https://e621.net/post/index/" + str(page + 1) + "/user:" + uploaderName
+		URL = "https://e621.net/post/index/" + str(page) + "/user:" + uploaderName
 
 	rs = requests.get(URL, headers=headers)
 	html_doc = rs.text
 	soup = BeautifulSoup(html_doc, 'html.parser')
 	sel = soup.select("span.thumb a") #取HTML中的<div class="title"></div>中的<a>標籤存入sel
 	numOfSub_URL = len(sel)
-	print("已掃描頁數 : " + str(page + 1) + "/" + str(totalPage))
 	#print(type(sel)) #看sel的型別
 
 	for index in range(numOfSub_URL):
@@ -105,6 +102,16 @@ for page in range(totalPage):
 
 	#print("下一頁")
 
+
+print("開始掃描...")
+threads = []
+for page in range(totalPage):
+	threads.append(threading.Thread(target=scanAPage, args=(page + 1,)))
+	threads[page].start()
+
+for i in range(totalPage):
+	threads[i].join()
+	#print("已掃描頁數 : " + str(i + 1) + "/" + str(totalPage))
 
 numOfSub_URL = len(img_page)
 print("已掃描圖片數 : " + str(numOfSub_URL))
@@ -155,9 +162,9 @@ print("\n下載完成\n")
 os.system("pause")
 
 #要整理程式碼
-#要改成同時取所有網頁回來，再依序分析，避免等待網站回應太久
+#考慮網址是在最後一頁的情形
+#要找750頁以後的圖片
 #之後再加上檔案重複不下載的功能
 #還有可以指定頁數的範圍
-#還有接受不同格式的網址
 #新增網站拒絕連線的例外狀況
 #沒有圖片就不要新增資料夾
