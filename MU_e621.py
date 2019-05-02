@@ -24,6 +24,11 @@ while 1==1:
 		TagSearchMode = 1
 		print("功能還在測試中，有錯誤請回報")
 		break
+	elif URL_temp[0:27]=="https://e621.net/post?tags=":
+		URL = URL_temp
+		TagSearchMode = 2
+		print("功能還在測試中，有錯誤請回報")
+		break
 	else:
 		print("請檢查網址格式")
 
@@ -59,9 +64,14 @@ if TagSearchMode == 0: #如果是從資訊主頁開始爬
 		os.system("pause")
 		os._exit(0)
 	#上面取得了上傳者名字uploaderName跟圖片總數totalPicture跟總頁數totalPage
-elif TagSearchMode == 1: #如果是從搜尋結果開始爬
+elif TagSearchMode == 1 or TagSearchMode == 2: #如果是從搜尋結果開始爬
 	#要取得搜尋關鍵字，用來新增資料夾
-	searchKeywords = URL[28:].split("/",2)[1] #把網址的最後一個token拆解出來
+	if TagSearchMode == 1:
+		searchKeywords = URL[28:].split("/",2)[1] #把網址的最後一個token拆解出來
+	if TagSearchMode == 2:
+		searchKeywords = URL[URL.find("post?tags=") + 10:]
+		print(searchKeywords)
+		
 	folderName = searchKeywords.replace("%20", " & ") #取代字串
 	#要取得總頁數，用來更改網址、告知進度和計算圖片總數
 	sel = soup.select("div #paginator div a")
@@ -74,7 +84,7 @@ elif TagSearchMode == 1: #如果是從搜尋結果開始爬
 
 
 print("總頁數 : " + str(totalPage))
-if TagSearchMode == 1:
+if TagSearchMode == 1 or TagSearchMode == 2:
 	print("總圖片數 : " + str(totalPicture) + " ~ " + str(totalPicture + 74))
 	print("(尚未掃描，無法得知確切數量)\n")
 else:
@@ -84,7 +94,7 @@ else:
 img_page = [] #宣告list
 
 def scanAPage(page):
-	if TagSearchMode == 1:
+	if TagSearchMode == 1 or TagSearchMode == 2:
 		URL = "https://e621.net/post/index/" + str(page) + "/" + str(searchKeywords)
 	else:
 		URL = "https://e621.net/post/index/" + str(page) + "/user:" + uploaderName
@@ -162,6 +172,7 @@ print("\n下載完成\n")
 os.system("pause")
 
 #要整理程式碼
+#加上網頁掃描的進度
 #考慮網址是在最後一頁的情形
 #要找750頁以後的圖片
 #之後再加上檔案重複不下載的功能
