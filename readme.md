@@ -7,7 +7,7 @@
 執行檔下載：  
 https://github.com/z83rulek/e621_picture_downloader/releases  
 
-**(Dune to the revision of that website, this tool is not working now)**  
+**(Dune to the revision of that website, this tool is not working now.)**  
 **(But I'm too busy to maintain this tool for now. Please find some other's project.)**  
 **(Sorry about that.)**  
 
