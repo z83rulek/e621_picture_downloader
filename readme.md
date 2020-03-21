@@ -7,9 +7,9 @@
 執行檔下載：  
 https://github.com/z83rulek/e621_picture_downloader/releases  
 
-**(Dune to the revision of that website, this tool is not working now)**
-**(But I'm too busy to maintain this tool for now. Please find some other's project.)**
-**(Sorry about that.)**
+## (Dune to the revision of that website, this tool is not working now)  
+## (But I'm too busy to maintain this tool for now. Please find some other's project.)  
+## (Sorry about that.)  
 
 Paste URL of an user's home page, then you can download all of his/her pictures, GIFs and videos  
 It will create an folder named by that user's ID, and then download all pictures, GIFs and videos uploaded by that user into the folder.  
